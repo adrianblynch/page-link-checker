@@ -1,22 +1,26 @@
 {
-  "name": "page-link-checker",
-  "version": "1.0.1",
-  "description": "Check links in a given page",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "node_modules/.bin/mocha test/index.js"
-  },
-  "author": "Adrian Lynch <adi_ady_ade@hotmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "jsdom": "^4.1.0",
-    "request": "^2.55.0"
-  },
-  "devDependencies": {
-    "chai": "^2.2.0",
-    "mocha": "^2.2.1"
-  }
+	"name": "page-link-checker",
+	"version": "1.0.2",
+	"description": "Check links in a page (via a URL) or supplied HTML",
+	"main": "index.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "node_modules/.bin/mocha test/index.js"
+	},
+	"author": "Adrian Lynch <adi_ady_ade@hotmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type" : "git",
+		"url": "http://github.com/npm/npm.git"
+	},
+	"dependencies": {
+		"jsdom": "^4.1.0",
+		"request": "^2.55.0"
+	},
+	"devDependencies": {
+		"chai": "^2.2.0",
+		"mocha": "^2.2.1"
+	}
 }
