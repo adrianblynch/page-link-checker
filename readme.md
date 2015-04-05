@@ -4,7 +4,7 @@ Check links on a page are correct.
 
 ## Install
 
-npm install page-link-checker
+`npm install page-link-checker`
 
 ## Usage
 
