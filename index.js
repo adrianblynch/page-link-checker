@@ -1,5 +1,5 @@
 var jsdom = require("jsdom")
-// var jquery = require("jquery") // TODO: Use this over the remove jquery source
+// var jquery = require("jquery") // TODO: Use this over the remote jquery source
 var request = require("request")
 // var Promise = require('es6-promise').Promise // TODO: Give users promises as well as callbacks
 
