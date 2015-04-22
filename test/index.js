@@ -1,9 +1,10 @@
 var expect = require("chai").expect
 var plc = require("../")
+var request = require("request")
 
 describe("check()", function () {
 
-	it("should list all links in HTML", function (done) {
+	it("should check all links in HTML", function (done) {
 
 		var page = [
 			"<a href='https://github.com/adrianblynch'>My Github</a>",
@@ -24,9 +25,11 @@ describe("check()", function () {
 
 	})
 
-	it("should list all links in a page", function (done) {
+	it("should check all links in a page", function (done) {
 
-		var url = "https://github.com/adrianblynch?tab=repositories"
+		this.timeout(10000)
+
+		var url = "http://www.adrianlynch.co.uk/"
 
 		plc.check(url, function (err, responses) {
 

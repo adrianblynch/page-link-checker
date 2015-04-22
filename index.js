@@ -1,56 +1,66 @@
-var jsdom = require("jsdom")
-// var jquery = require("jquery") // TODO: Use this over the remote jquery source
+var $ = require("cheerio")
+var isHtml = require("is-html")
 var request = require("request")
 // var Promise = require('es6-promise').Promise // TODO: Give users promises as well as callbacks
 
-var responses = [];
+var responses = []
 
-exports.check = function(page, callback) {
+function generateResponses(page, callback) {
 
-	jsdom.env(page, ["http://code.jquery.com/jquery.js"], function(errs, window) {
+	var links = $("a", page)
+	var counter = links.length
 
-		if (errs) {
-			return callback(errs)
+	links.map(function (i, link) {
+
+		var $link = $(link)
+
+		var url = $link.attr("href")
+		var response = {
+			link: {
+				href: url,
+				text: $link.text()
+			},
+			request: {
+				failed: false
+			}
 		}
 
-		var links = window.$("a")
-		var counter = links.length
+		request({
+			method: "HEAD",
+			url: url
+		}, function (err, res, body) {
 
-		links.map(function(i, link) {
+			counter--
 
-			var response = {
-				link: {
-					href: link.href,
-					text: link.innerHTML
-				},
-				request: {
-					failed: false
-				}
+			if (err) {
+				response.request = {failed: true} // TODO: Pass back more info?
+			} else {
+				response.request.statusCode = res.statusCode
 			}
 
-			request({
-				method: "HEAD",
-				url: link.href
-			}, function(err, res, body) {
+			responses.push(response)
 
-				counter--
-
-				if (err) {
-					response.request = {failed: true} // TODO: Pass back more info?
-				} else {
-					response.request.statusCode = res.statusCode
-				}
-
-				responses.push(response)
-
-				if (counter === 0) {
-					return callback(null, responses)
-				}
-
-			})
+			if (counter === 0) {
+				return callback(null, responses)
+			}
 
 		})
 
 	})
+
+}
+
+exports.check = function (page, callback) {
+
+	if (isHtml(page)) {
+		generateResponses(page, callback)
+	} else {
+		request.get(page, function (err, response, body) {
+			if (err) {
+				return callback(err)
+			}
+			generateResponses(body, callback)
+		})
+	}
 
 }
