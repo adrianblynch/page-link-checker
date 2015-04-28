@@ -33,7 +33,7 @@ describe("check()", function () {
 
 		this.timeout(10000)
 
-		var url = "http://www.adrianlynch.co.uk/"
+		var url = "https://www.google.co.uk/"
 
 		plc.check(url, function (err, responses) {
 
@@ -41,7 +41,6 @@ describe("check()", function () {
 			expect(responses[0]).to.have.keys(["link", "request"])
 			expect(responses[0].link).to.have.keys(["href", "text"])
 			expect(responses[0].request).to.have.keys(["failed", "statusCode"])
-			expect(responses[0].request.failed).to.be.false
 
 			done()
 
