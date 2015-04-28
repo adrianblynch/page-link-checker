@@ -10,14 +10,14 @@ describe("check()", function () {
 
 	it("should check all links in HTML", function (done) {
 
-		var page = [
+		var links = [
 			"<a href='https://github.com/adrianblynch'>My Github</a>",
 			"<a href='https://github.com/noonehereexceptforus'>Noone's Github</a>"
-		].join("")
+		]
 
-		plc.check(page, function (err, responses) {
+		plc.check(links.join(""), function (err, responses) {
 
-			expect(responses).to.be.an("array").and.have.length(2)
+			expect(responses).to.be.an("array").and.have.length(links.length)
 
 			// Good
 			expect(responses[0]).to.have.keys(keys)
