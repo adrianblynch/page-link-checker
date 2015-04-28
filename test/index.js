@@ -4,6 +4,10 @@ var request = require("request")
 
 describe("check()", function () {
 
+	var keys = ["link", "request"]
+	var linkKeys = ["href", "text"]
+	var requestKeys = ["failed", "statusCode"]
+
 	it("should check all links in HTML", function (done) {
 
 		var page = [
@@ -14,9 +18,9 @@ describe("check()", function () {
 		plc.check(page, function (err, responses) {
 
 			expect(responses).to.be.an("array").and.have.length(2)
-			expect(responses[0]).to.have.keys(["link", "request"])
-			expect(responses[0].link).to.have.keys(["href", "text"])
-			expect(responses[0].request).to.have.keys(["failed", "statusCode"])
+			expect(responses[0]).to.have.keys(keys)
+			expect(responses[0].link).to.have.keys(linkKeys)
+			expect(responses[0].request).to.have.keys(requestKeys)
 			expect(responses[0].request.failed).to.be.false
 
 			done()
