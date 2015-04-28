@@ -12,7 +12,8 @@ describe("check()", function () {
 
 		var links = [
 			"<a href='https://github.com/adrianblynch'>My Github</a>",
-			"<a href='https://github.com/noonehereexceptforus'>Noone's Github</a>"
+			"<a href='https://github.com/noonehereexceptforus'>Noone's Github</a>",
+			"<a href='https://githubzzzzz.com/adrianblynch'>No Such Site</a>"
 		]
 
 		plc.check(links.join(""), function (err, responses) {
@@ -32,6 +33,13 @@ describe("check()", function () {
 			expect(responses[1].request).to.have.keys(requestKeys)
 			expect(responses[1].request.failed).to.be.false
 			expect(responses[1].request.statusCode).to.equal(404)
+
+			// Broken
+			expect(responses[2]).to.have.keys(keys)
+			expect(responses[2].link).to.have.keys(linkKeys)
+			expect(responses[2].request).to.have.keys(requestKeys)
+			expect(responses[2].request.failed).to.be.true
+			expect(responses[2].request.statusCode).to.be.null
 
 			done()
 
