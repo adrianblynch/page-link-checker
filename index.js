@@ -21,7 +21,8 @@ function generateResponses(page, callback) {
 				text: $link.text()
 			},
 			request: {
-				failed: false
+				failed: false,
+				statusCode: null
 			}
 		}
 
@@ -33,7 +34,7 @@ function generateResponses(page, callback) {
 			counter--
 
 			if (err) {
-				response.request = {failed: true} // TODO: Pass back more info?
+				response.request.failed = true // TODO: Pass back more info?
 			} else {
 				response.request.statusCode = res.statusCode
 			}
