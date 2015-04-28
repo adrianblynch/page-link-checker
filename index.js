@@ -39,7 +39,7 @@ function generateResponses(page, callback) {
 				response.request.statusCode = res.statusCode
 			}
 
-			responses.push(response)
+			responses[i] = response
 
 			if (counter === 0) {
 				return callback(null, responses)
