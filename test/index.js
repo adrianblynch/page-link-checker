@@ -31,7 +31,7 @@ describe("check()", function () {
 
 	it("should check all links in a page", function (done) {
 
-		this.timeout(10000)
+		this.timeout(5000)
 
 		var url = "https://www.google.co.uk/"
 
