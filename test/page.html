@@ -4,9 +4,13 @@
 	<title>A page full of links</title>
 </head>
 <body>
-	<a href="page.html">A relate link back to itself</a>
-	<a href="404.html">A relate link back to a 404</a>
-	<a href="https://github.com/adrianblynch/page-link-checker/blob/master/test/page.html">A full link back to itself</a>
-	<a href="https://github.com/adrianblynch/page-link-checker/blob/master/test/404.html">A full link back to a 404</a>
+	<!-- Good -->
+	<a href="https://github.com/adrianblynch/page-link-checker/blob/master/test/page.html">A working full link</a>
+	<!-- Bad -->
+	<a href="https://github.com/adrianblynch/page-link-checker/blob/master/test/404.html">A bad full link</a>
+	<!-- Broken -->
+	<a href="https://githubzzzzz.com/adrianblynch/page-link-checker/blob/master/test/page.html">A busted full link</a>
+	<!-- Relative -->
+	<a href="page.html">A relative link</a>
 </body>
 </html>

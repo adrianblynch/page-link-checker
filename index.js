@@ -1,11 +1,13 @@
 var $ = require("cheerio")
 var isHtml = require("is-html")
 var request = require("request")
+var nodeUrl = require("url")
+var isRelativeUrl = require("is-relative-url")
 // var Promise = require('es6-promise').Promise // TODO: Give users promises as well as callbacks
 
 var responses = []
 
-function generateResponses(page, callback) {
+function generateResponses(page, baseUrl, callback) {
 
 	var links = $("a", page)
 	var counter = links.length
@@ -13,12 +15,16 @@ function generateResponses(page, callback) {
 	links.map(function (i, link) {
 
 		var $link = $(link)
-
 		var url = $link.attr("href")
+
+		if (isRelativeUrl(url) && baseUrl) {
+			url = nodeUrl.resolve(baseUrl, url)
+		}
+
 		var response = {
 			link: {
 				href: url,
-				text: $link.text()
+				text: $link.text(),
 			},
 			request: {
 				failed: false,
@@ -51,16 +57,21 @@ function generateResponses(page, callback) {
 
 }
 
-exports.check = function (page, callback) {
+exports.check = function (page, baseUrl, callback) {
+
+	if (typeof baseUrl === "function") {
+		callback = baseUrl
+		baseUrl = null
+	}
 
 	if (isHtml(page)) {
-		generateResponses(page, callback)
+		generateResponses(page, baseUrl, callback)
 	} else {
 		request.get(page, function (err, response, body) {
 			if (err) {
 				return callback(err)
 			}
-			generateResponses(body, callback)
+			generateResponses(body, page, callback)
 		})
 	}
 
