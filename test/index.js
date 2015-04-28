@@ -12,16 +12,26 @@ describe("check()", function () {
 
 		var page = [
 			"<a href='https://github.com/adrianblynch'>My Github</a>",
-			"<a href='https://github.com/adrianblynch?tab=repositories'>My Github Repos</a>"
+			"<a href='https://github.com/noonehereexceptforus'>Noone's Github</a>"
 		].join("")
 
 		plc.check(page, function (err, responses) {
 
 			expect(responses).to.be.an("array").and.have.length(2)
+
+			// Good
 			expect(responses[0]).to.have.keys(keys)
 			expect(responses[0].link).to.have.keys(linkKeys)
 			expect(responses[0].request).to.have.keys(requestKeys)
 			expect(responses[0].request.failed).to.be.false
+			expect(responses[0].request.statusCode).to.equal(200)
+
+			// Bad
+			expect(responses[1]).to.have.keys(keys)
+			expect(responses[1].link).to.have.keys(linkKeys)
+			expect(responses[1].request).to.have.keys(requestKeys)
+			expect(responses[1].request.failed).to.be.false
+			expect(responses[1].request.statusCode).to.equal(404)
 
 			done()
 
