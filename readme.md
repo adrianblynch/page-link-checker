@@ -15,8 +15,9 @@ var plc = require("page-link-checker")
 // Check links on a page
 
 var pageUrl = "https://github.com/adrianblynch?tab=repositories"
+var baseUrl = "https://github.com/"
 
-plc.check(pageUrl, function (err, responses) {
+plc.check(pageUrl, baseUrl, function (err, responses) {
 
 	console.log("Page URL:", responses)
 
