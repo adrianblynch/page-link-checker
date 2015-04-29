@@ -110,13 +110,13 @@ describe("check()", function () {
 
 	// 	plc.check(page, function (err, responses) {
 
-	// 		expect(responses).to.be.an("array").and.have.length(2)
-	// 		expect(responses[0]).to.have.keys(["link", "request"])
-	// 		expect(responses[0].link).to.have.keys(["href", "text"])
-	// 		expect(responses[0].request).to.have.keys(["failed", "statusCode"])
+	// 		expect(responses).to.be.an("array")
+	// 		expect(responses[0]).to.have.keys(keys)
+	// 		expect(responses[0].link).to.have.keys(linkKeys)
+	// 		expect(responses[0].request).to.have.keys(requestKeys)
 	// 		expect(responses[0].request.failed).to.be.false
 
-	// 		console.log(JSON.stringify(responses, null, 3))
+	// 		console.log(JSON.stringify(responses.filter(function (response) { return response.request.statusCode !== 200 }), null, 3))
 
 	// 		done()
 
