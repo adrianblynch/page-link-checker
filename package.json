@@ -16,7 +16,7 @@
     "url": "https://github.com/adrianblynch/page-link-checker.git"
   },
   "dependencies": {
-    "cheerio": "^0.19.0",
+    "cheerio": "^0.20.0",
     "is-html": "^1.0.0",
     "is-relative-url": "^1.0.0",
     "jsdom": "^4.1.0",
